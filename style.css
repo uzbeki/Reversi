@@ -5,10 +5,49 @@ body {
     background: rgb(21, 21, 21);
 }
 
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: grid;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+
 .background {
     position: absolute;
     display: block;
     top: 0;
     left: 0;
     z-index: 0;
+}
+
+.game-container {
+    width: 100%;
+}
+
+.game-container table td {
+    background-color: #3aba6d;
+    color: #0ce3ac;
+    width: 65px;
+    height: 65px;
+    text-align: center;
+}
+
+p {
+    display: inline-block;
+    width: 80%;
+    height: 80%;
+    border: 2px solid #797474;
+    border-radius: 50%;
+}
+
+p.black {
+    background: #080808;
+}
+
+p.white {
+    background: #d4d4d4;
 }

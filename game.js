@@ -26,4 +26,4 @@ white_piece.forEach(element => {
 })
 
 // how to put a puice in somewhere
-table.rows[2].cells[2].appendChild(document.createElement("p"))
+table.rows[2].cells[3].appendChild(document.createElement("p"))

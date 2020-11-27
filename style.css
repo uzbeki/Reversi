@@ -22,10 +22,16 @@ body {
     top: 0;
     left: 0;
     z-index: 0;
+    pointer-events: none;
 }
 
 .game-container {
     width: 100%;
+    border-radius: 10%;
+    overflow: hidden;
+    border-collapse: inherit;
+    max-width: 80vw;
+    /* max-height: 80vh; */
 }
 
 .game-container table td {
@@ -36,7 +42,7 @@ body {
     text-align: center;
 }
 
-p {
+td p {
     display: inline-block;
     width: 80%;
     height: 80%;

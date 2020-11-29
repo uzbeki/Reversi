@@ -63,7 +63,6 @@ td p {
     margin: 7%;
 
     transition: all .1s linear;
-    
 }
 td p.white:hover{
     background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
@@ -82,6 +81,10 @@ p.white {
     background: #e4e4e4;
     background-image: linear-gradient(top, #f4f1ee, #fff);
     box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5);
+}
+
+td.ok{
+    cursor: pointer;
 }
 
 @media only screen and (max-width:500px) { 

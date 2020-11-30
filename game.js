@@ -61,7 +61,7 @@ const check = (row, col, direction) => {
     console.log("check() for possible mves");
     row_change = direction[0];
     col_change = direction[1];
-    console.log(`checking (${row}, ${col} for ${row_change}, ${col_change})`);
+    // console.log(`checking (${row}, ${col} for ${row_change}, ${col_change})`);
     has_opposite = false;　 // 相手があるかどうか
     let i, j;
     for (i = row + row_change, j = col + col_change; i < 8 && j < 8 && i >= 0 && i >= 0; i += row_change, j += col_change) {
@@ -164,14 +164,23 @@ const clicked = () => {
     });
 }
 
-//windowのloadが終了した後に実行する関数
-window.addEventListener("load", () => {
-    possible_moves();
-    clicked();
-    if (go_ahead) { //ここの中に入らないです。
-        change_turns();
-        go_ahead = false;
-        possible_moves();
-        clicked();
-    };
-});
+possible_moves();
+clicked();
+/* やりたい流れ:
+window.onload{
+    // possible_moves();
+    // clicked();
+    // clickを待つ
+    // change_turns();
+    // possible_moves();
+    // clicked();
+    // clickを待つ
+    // change_turns();
+    // possible_moves();
+    // clicked();
+    // clickを待つ
+    // .
+    // .
+    // .
+}
+*/

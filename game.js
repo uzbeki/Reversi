@@ -185,12 +185,23 @@ function piece_clicked(e) {
 
 const is_over = () => {
     if (document.querySelectorAll("td.ok").length <= 0) {
-        game_over();
+        document.querySelector("#black-score").innerHTML = document.querySelectorAll("td.black").length;
+        document.querySelector("#white-score").innerHTML = document.querySelectorAll("td.white").length;
+        let winner = document.querySelector("#winner").innerHTML
+        if (current_player.all_pieces().length > opposite_player.all_pieces().length) {
+            winner = current_player.color.toUpperCase()
+        } else if (current_player.all_pieces().length < opposite_player.all_pieces().length) {
+            winner = opposite_player.color.toUpperCase();
+        } else {
+            winner = "DRAW!"
+            document.querySelector("body > div.modal > div > div.message > p").remove();
+        }
+        document.querySelector(".modal").classList.toggle("show-modal");
     } else {
         return false;
     }
 }
 
-const game_over = () => {
-    console.log("game is over!");
-}
+document.querySelector("#clear-modal").addEventListener("click", () => {
+    document.querySelector(".modal").classList.toggle("show-modal")
+})

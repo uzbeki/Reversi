@@ -118,8 +118,21 @@
         </div>
 
     </div>
-    <canvas class="background">
-            </canvas>
+    <canvas class="background"></canvas>
+    <div class="modal" style="display: block;">
+        <div class="modal-content">
+            <button id="clear-modal">x</button>
+            <div class="scores">
+                <p>black: <span id="black-score">2</span></p>
+                <p>white: <span id="white-score">2</span></p>
+            </div>
+            <div class="message">
+                <h2 id="winner">BLACK</h2>
+                <p>won!</p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
     <script>
         window.

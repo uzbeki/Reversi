@@ -26,17 +26,6 @@ body {
     align-items: center;
 }
 
-.background {
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    pointer-events: none;
-    width: 100vw;
-    height: 100vh;
-}
-
 .status {
     display: flex;
     flex-wrap: nowrap;
@@ -86,7 +75,7 @@ label:after {
     height: 40px;
     background: var(--black-color);
     border-radius: 90px;
-    transition: 0.3s;
+    transition: .8s;
 }
 
 input:checked+label:after {
@@ -214,6 +203,17 @@ button#start_btn {
     table {
         border-spacing: 1px;
     }
+}
+
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
 }
 
 

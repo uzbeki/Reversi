@@ -1,19 +1,29 @@
+:root {
+    --board-color: #3aba6d;
+    --black-color: #080808;
+    --white-color: #e4e4e4;
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
     background: rgb(21, 21, 21);
+    overflow: hidden;
 }
 
 .container {
     position: relative;
     width: 100%;
     height: 100%;
+    margin: 1rem;
     position: absolute;
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
     z-index: 1;
-    align-items: center;
+    /* text-align: center; */
     justify-content: center;
+    align-items: center;
 }
 
 .background {
@@ -21,35 +31,94 @@ body {
     display: block;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: -1;
     pointer-events: none;
+    width: 100vw;
+    height: 100vh;
 }
-table{
+
+.status {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.status>p,
+div {
+    margin: 0 .9rem;
+    vertical-align: middle;
+}
+
+.status p {
+    color: white;
+}
+
+.status p.white_turn {
+    opacity: .5;
+}
+
+input[type=checkbox] {
+    height: 0;
+    width: 0;
+    /* visibility: hidden; */
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 100px;
+    height: 50px;
+    background: var(--board-color);
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    margin: .5rem 0;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    background: var(--black-color);
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+    background: var(--white-color);
+}
+
+
+/* table */
+
+table {
     table-layout: fixed;
     width: 100%;
     height: 100%;
     border-radius: 16px;
     overflow: hidden;
 }
-td{
+
+td {
     width: calc(100%/8);
     height: calc(100%/8);
+    background-color: var(--board-color);
 }
+
 .game-container {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     max-width: 600px;
     max-height: 600px;
-    height: 100%;  
-}
-
-.game-container table td {
-    background-color: #3aba6d;
-    /* color: #0ce3ac;
-    width: 65px;
-    height: 65px;
-    text-align: center; */
+    height: 100%;
 }
 
 td p {
@@ -61,36 +130,84 @@ td p {
     margin-block-end: 0;
     margin-block-start: 0;
     margin: 7%;
-
     transition: all .1s linear;
 }
-td p.white:hover{
+
+td p.white:hover {
     background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
     background-image: linear-gradient(top, #fff, #f4f1ee);
-    color:#0088cc;
-    color:#83d244;
-    text-shadow:0px 0px 6px #83d244;
+    color: #0088cc;
+    color: #83d244;
+    text-shadow: 0px 0px 6px #83d244;
 }
+
 p.black {
-    background: #080808;
+    background: var(--black-color);
     background: linear-gradient(to bottom right, black, #565656);
     box-shadow: 1px 1px 6px;
 }
 
 p.white {
-    background: #e4e4e4;
+    background: var(--white-color);
     background-image: linear-gradient(top, #f4f1ee, #fff);
-    box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5);
+    box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204, 198, 197, .5);
 }
 
-td.ok{
+td.ok {
     cursor: pointer;
 }
 
-@media only screen and (max-width:500px) { 
-    .game-container{
+p.ok {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    transform: scale(1);
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.85);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+    }
+    100% {
+        transform: scale(0.85);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+.buttons-container {
+    margin: 1rem;
+}
+
+.buttons-container button {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    background: var(--board-color);
+    /*Button Color*/
+    color: #FFF;
+    border-bottom: solid 4px #61a07d;
+    border-radius: 20%;
+    margin: 0 .5rem 0 .5rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+button:active {
+    -ms-transform: translateY(4px);
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    /*Move down*/
+    border-bottom: none;
+    /*disappears*/
+}
+
+@media only screen and (max-width:500px) {
+    .game-container {
         max-width: 320px;
         max-height: 320px;
     }
-
- }
+}

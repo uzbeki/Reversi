@@ -7,11 +7,19 @@
     <title>Testing website</title>
     <script defer src="game.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
     <div class="container">
+        <div class="status">
+            <p class="black_turn">BLACK</p>
+            <div class="input">
+                <input type="checkbox" id="switch" disabled/><label for="switch">Toggle</label>
+            </div>
+            <p class="white_turn">WHITE</p>
 
+        </div>
         <div class="game-container">
             <table name="game-table" id="game-table">
                 <tr>
@@ -104,6 +112,11 @@
                     </tr>
             </table>
         </div>
+        <div class="buttons-container">
+            <button id="start_btn" onclick="possible_moves()"><i class="fa fa-play" value="start"></i></button>
+            <button id="reset_btn" onclick="location.reload(); return false;" type="reset"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+        </div>
+
     </div>
     <canvas class="background">
             </canvas>

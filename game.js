@@ -3,7 +3,7 @@
 
 const table = document.getElementById("game-table");　 // テーブル
 const table_length = document.getElementById("game-table").rows[0].cells.length;　 //テーブルのサイズ
-const td = document.querySelectorAll("td"); // 全てのtdタッグ
+
 
 // 横、縦、斜めの確認に必要のある方向の計算し方
 const directions = [
@@ -38,9 +38,16 @@ const change_turns = () => {
     if (current_player == black) {
         current_player = white;
         opposite_player = black;
+        document.querySelector("p.white_turn").style.opacity = 1;
+        document.querySelector("p.black_turn").style.opacity = .2;
+        document.getElementById("switch").checked = true;
     } else {
         current_player = black;
         opposite_player = white;
+        document.getElementById("switch").checked = false
+        document.querySelector("p.white_turn").style.opacity = .5;
+        document.querySelector("p.black_turn").style.opacity = 1;
+
     }
 
     console.log("change_turns()");
@@ -64,14 +71,15 @@ let point = new Point(undefined, undefined)　 // Pointのオブジェクト　�
 
 // current_player(自分)の横、縦、斜めに置けれる場所を探す関数
 const check = (row, col, direction) => {
-    console.log("check() for possible mves");
+    // console.log("check() for possible mves");
     row_change = direction[0];
     col_change = direction[1];
-    // console.log(`checking (${row}, ${col} for ${row_change}, ${col_change})`);
+    console.log(`checking (${row}, ${col} for ${row + row_change}, ${col + col_change})`);
     has_opposite = false;　 // 相手があるかどうか
     let i, j;
-    for (i = row + row_change, j = col + col_change; i < 8 && j < 8 && i >= 0 && i >= 0; i += row_change, j += col_change) {
+    for (i = row + row_change, j = col + col_change; i < table_length && j < table_length && i >= 0 && j >= 0; i += row_change, j += col_change) {
         let piece = table.rows[i].cells[j];
+        // console.log(piece);
         if (piece.classList.contains(opposite_player.color)) {　 //もしpieceは相手の石だったら
             // console.log(`opposite ${opposite_player.color} player found at ${row}, ${i}`);
             has_opposite = true;
@@ -95,7 +103,7 @@ const check = (row, col, direction) => {
 
 // 上のcheck()を自分の全部のピースで、横、縦、斜めで確認する関数
 const possible_moves = () => {
-    console.log("possible_moves()");
+    // console.log("possible_moves()");
     current_player.all_pieces().forEach(element => {
         element.parentNode.className = current_player.color;
         row = element.parentNode.parentNode.rowIndex;
@@ -108,7 +116,7 @@ const possible_moves = () => {
 
 // check()が入れたp.okを消していく・リセットする関数
 const possible_moves_reset = () => {
-    console.log("possible_moves_reset()");
+    // console.log("possible_moves_reset()");
     const ok_pieces = document.querySelectorAll("td.ok");
     ok_pieces.forEach(element => {
         element.className = "empty";
@@ -119,7 +127,7 @@ const possible_moves_reset = () => {
 
 // 相手のピースをひっくり返す関数
 const outflank = (row, col, direction) => {
-    console.log("outflank()");
+    // console.log("outflank()");
     has_opposite = false;
     row_change = direction[0];
     col_change = direction[1];
@@ -138,7 +146,7 @@ const outflank = (row, col, direction) => {
                 for (q = point.row, w = point.col; q != i || w != j; q += row_change, w += col_change) {
                     table.rows[q].cells[w].className = current_player.color;
                     table.rows[q].cells[w].children[0].className = current_player.color;
-                    console.log("piece changed");
+                    // console.log("piece changed");
                     // console.log(table.rows[q].cells[w]);
                 }
             }
@@ -152,7 +160,7 @@ const outflank = (row, col, direction) => {
 let go_ahead = false;　 // 関数の全部一気に実行させないために使おうとしています
 
 function piece_clicked(e) {
-    console.log(e);
+    // console.log(e);
     if (e.path[0].childElementCount == 0) {
         point.row = e.path[2].rowIndex
         point.col = e.path[1].cellIndex
@@ -164,8 +172,6 @@ function piece_clicked(e) {
     }
 
 
-    // piece.children[0].className = current_player.color;
-    // piece.className = current_player.color;
     //outflank
     directions.forEach(direction => {
         outflank(point.row, point.col, direction);
@@ -173,27 +179,18 @@ function piece_clicked(e) {
     possible_moves_reset();
     change_turns();
     possible_moves();
+    is_over();
+
 }
 
-possible_moves();
-
-// change_turns()
-// possible_moves()
-/* やりたい流れ:
-window.onload{
-    // possible_moves();
-    // clicked();
-    // clickを待つ
-    // change_turns();
-    // possible_moves();
-    // clicked();
-    // clickを待つ
-    // change_turns();
-    // possible_moves();
-    // clicked();
-    // clickを待つ
-    // .
-    // .
-    // .
+const is_over = () => {
+    if (document.querySelectorAll("td.ok").length <= 0) {
+        game_over();
+    } else {
+        return false;
+    }
 }
-*/
+
+const game_over = () => {
+    console.log("game is over!");
+}

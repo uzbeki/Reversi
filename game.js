@@ -1,9 +1,6 @@
 /* Reversie Game made in HTML/CSS/JS */
-
-
 const table = document.getElementById("game-table");　 // テーブル
 const table_length = document.getElementById("game-table").rows[0].cells.length;　 //テーブルのサイズ
-
 
 // 横、縦、斜めの確認に必要のある方向の計算し方
 const directions = [
@@ -49,15 +46,6 @@ const change_turns = () => {
         document.querySelector("p.black_turn").style.opacity = 1;
 
     }
-
-    /* console.log("change_turns()"); */
-    /* console.log(`current_player is ${current_player.color}`); */
-    // document.querySelectorAll("td.ok").forEach(ok => {
-    //     ok.addEventListener('click', piece_clicked, false)
-    // });;
-    // current_player.all_pieces().forEach(piece => {
-    //     piece.children[0].className += "current"
-    // });
 }
 
 //ボードの場所
@@ -180,20 +168,18 @@ function piece_clicked(e) {
     change_turns();
     possible_moves();
     is_over();
-
 }
 
 const is_over = () => {
     if (document.querySelectorAll("td.ok").length <= 0) {
         document.querySelector("#black-score").innerHTML = document.querySelectorAll("td.black").length;
         document.querySelector("#white-score").innerHTML = document.querySelectorAll("td.white").length;
-        let winner = document.querySelector("#winner").innerHTML
         if (current_player.all_pieces().length > opposite_player.all_pieces().length) {
-            winner = current_player.color.toUpperCase()
+            document.querySelector("#winner").textContent = current_player.color.toUpperCase()
         } else if (current_player.all_pieces().length < opposite_player.all_pieces().length) {
-            winner = opposite_player.color.toUpperCase();
-        } else {
-            winner = "DRAW!"
+            document.querySelector("#winner").textContent = opposite_player.color.toUpperCase();
+        } else if (current_player.all_pieces().length == opposite_player.all_pieces().length) {
+            document.querySelector("#winner").textContent = "DRAW!"
             document.querySelector("body > div.modal > div > div.message > p").remove();
         }
         document.querySelector(".modal").classList.toggle("show-modal");
@@ -201,7 +187,12 @@ const is_over = () => {
         return false;
     }
 }
-
 document.querySelector("#clear-modal").addEventListener("click", () => {
     document.querySelector(".modal").classList.toggle("show-modal")
 })
+
+const start = () => {
+    possible_moves();
+    document.querySelector("#start_btn").remove();
+    document.querySelector("#reset_btn").style.display = "inline-block"
+}

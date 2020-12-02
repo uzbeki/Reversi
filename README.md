@@ -1,5 +1,5 @@
-<p align="center">
-  <a href="" rel="noopener"> 
+<p align="center" style="border-radius: 50%;">
+  <a href="" rel="noopener" style="border-radius: 50%;"> 
  <img style="border-radius: 50%;" width=200px height=200px src="static\game_shot.jpg" alt="Project logo"></a>
 </p>
 
@@ -8,7 +8,6 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
